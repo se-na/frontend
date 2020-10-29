@@ -1,16 +1,19 @@
 import React from "react";
+import {ListEntry} from "./ListEntry";
 
 function List (
-    changesets
+    changesets,
 ) {
-    changesets= [{name:"fehler1"}, {name:"fehler1"}];
-    const listItems = changesets.map((changeset) => <li>{changeset.name}</li>);
+    console.log(changesets);
+
     return (
-        <ul>
-            <li>
-                {listItems}
-            </li>
-        </ul>
+        <div>
+            {changesets.changesets.map((changeset) => (
+                <ListEntry
+                    id={changeset.id}
+                    changesetProperties={changeset.properties}/>
+            ))}
+        </div>
     );
 }
 

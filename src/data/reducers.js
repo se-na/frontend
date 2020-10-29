@@ -20,9 +20,21 @@ function changesets(state = initialChangesetsState, action) {
     }
 }
 
-const reducers = combineReducers({
+function changesets2(state = initialChangesetsState, action) {
+    switch (action.type) {
+        case "FETCH_CHANGESETS_STARTED":
+            return { ...state, isLoading: true, error: null, total: null };
+        default:
+            return state;
+    }
+}
+
+const rootReducers = combineReducers({
     changesets,
+    changesets2,
 });
+
+export default rootReducers;
 
 // Selectors:
 
@@ -30,4 +42,4 @@ export function getChangesets(state) {
     return state.changesets.entries;
 }
 
-export default reducers;
+
