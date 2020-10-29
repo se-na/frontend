@@ -4,6 +4,8 @@ import {
     Grid,
     Header,
     Segment,
+    Dimmer,
+    Loader
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 
@@ -16,13 +18,21 @@ import Dropdown from "../components/Dropdown";
 
 function Overview(
     changesets,
-    fetchChangesets
+    fetchChangesets,
 ) {
     useEffect(() => {
-        if (!changesets) {
-            fetchChangesets();
+        if (changesets) {
+            fetchChangesets("Token ef77f928d91f3816ca60e7b73a8711119e825e44");
         }
     }, [fetchChangesets, changesets]);
+
+    if (!changesets) {
+        return (
+            <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+            </Dimmer>
+        );
+    }
 
     return (
         <Segment class="main">
@@ -57,7 +67,7 @@ function Overview(
 const mapStateToProps = (state) => {
     return {
         changesets: getChangesets(state),
-    }
+    };
 };
 
 const mapDispatchToProps = {
