@@ -2,7 +2,11 @@ import React from "react";
 import Card from 'react-bootstrap/Card'
 import { Nav } from 'reactstrap'
 
-function Detailview () {
+function Detailview (
+    actual,
+) {
+
+    console.log(actual.actual);
     return (
         <Card>
             <Card.Header class="HeaderCard">
@@ -17,12 +21,14 @@ function Detailview () {
                         <Nav.Link href="#diskussion">Diskussion</Nav.Link>
                     </Nav.Item>
                 </Nav>*/}
-                <p>Übersicht</p>
             </Card.Header>
             <Card.Body>
-                <Card.Title>Lala</Card.Title>
+                <Card.Title>Fehler ID: {actual.actual.id}</Card.Title>
                 <Card.Text>
-                    With supporting text below as a natural lead-in to additional content.
+                    <p>Beschreibung: {actual.actual.properties.comment}</p>
+                    <p>User: {actual.actual.properties.user}</p>
+                    <p>Date: {actual.actual.properties.date}</p>
+                    <p>Bearbeitungen: {actual.actual.properties.delete} gelöscht, {actual.actual.properties.modify} bearbeitet, {actual.actual.properties.create} hinzugefügt</p>
                 </Card.Text>
             </Card.Body>
         </Card>

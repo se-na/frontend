@@ -3,9 +3,8 @@ import {ListEntry} from "./ListEntry";
 
 function List (
     changesets,
+    actual,
 ) {
-    console.log(changesets);
-
     return (
         <div>
             {changesets.changesets.map((changeset) => (

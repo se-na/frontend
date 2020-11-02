@@ -1,14 +1,14 @@
 import * as api from "./api";
 
-export function fetchChangesets(Token) {
-    return (dispatch, getState) => {
+export function fetchChangesets(token) {
+    return (dispatch) => {
 
         dispatch({ type: "FETCH_CHANGESETS_STARTED" });
 
         return api
-            .getChangesetsFromAPI(Token)
-            .then(({ result: changesets, query: { resultcount } }) => {
-                dispatch({ type: "FETCH_CHANGESETS_SUCCEEDED", changesets, resultcount });
+            .getChangesetsFromAPI(token)
+            .then(({ features: changesets}) => {
+                dispatch({ type: "FETCH_CHANGESETS_SUCCEEDED", changesets });
             })
             .catch((error) => dispatch({ type: "FETCH_CHANGESETS_FAILED", error }));
     };

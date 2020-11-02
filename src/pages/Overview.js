@@ -1,77 +1,93 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {
     Grid,
     Header,
     Segment,
     Dimmer,
-    Loader
+    Loader,
+    Button,
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+
+import { connect } from "react-redux";
+import { fetchChangesets } from "../data/actions";
 
 import List from "../components/List"
 import Map from "../components/Map";
 import Detailview from "../components/Detailview";
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../components/SortDropdown";
 import {getChangesetsFromAPI} from "../data/api";
+import logo from '../logo.svg';
 
-class Overview extends React.Component{
+function Overview ({
+    changesets,
+    actual,
+    dispatch,}){
 
-    state = {
-        changesets: undefined,
-    };
 
-    componentDidMount() {
-        const { changesets } = this.state;
+    const token = "Token ef77f928d91f3816ca60e7b73a8711119e825e44";
+
+    useEffect(() => {
         if (!changesets) {
-            this.fetchChangesets();
+            dispatch(fetchChangesets(token));
         }
-    }
+    }, [dispatch, token, changesets]);
 
-    fetchChangesets = () =>{
-        getChangesetsFromAPI("Token ef77f928d91f3816ca60e7b73a8711119e825e44").then(({ features: changesets }) =>
-            this.setState({ changesets })
-        );
-
-    };
-
-    render() {
-        const {changesets} = this.state;
-        if (!changesets) {
-            return (
-                <Dimmer active inverted>
-                    <Loader inverted>Loading</Loader>
-                </Dimmer>
-            );
-        }
+    if (!changesets) {
         return (
-            <Segment class="main">
-                <Header>
-                    Default Filter
-                </Header>
-                <Grid stretched spacing={0} style={{minhight: 700, height: '95vh'}}>
-                    <Grid.Column width={6}>
-                        <Segment>
-                            <Header as="h3" content="Auffällige Datensätze"/>
-                            <div>
-                                <Dropdown/>
-                            </div>
-                            <List
-                                changesets={changesets}
-                            />
-                        </Segment>
-                    </Grid.Column>
-                    <Grid.Column width={10}>
-                        <Segment style={{minHeight: '80px', height: '70%'}}>
-                            <Map/>
-                        </Segment>
-                        <Segment>
-                            <Detailview/>
-                        </Segment>
-                    </Grid.Column>
-                </Grid>
-            </Segment>
+            <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+            </Dimmer>
         );
     }
+
+    console.log(actual.id);
+    return (
+        <Segment class="main">
+            <Header>
+                <div className="flex">
+                    <Button as={Link} to={"/"}>Zurück zur Übersicht</Button>
+                    <h1>Default Filter</h1>
+                    <img src={logo} alt="SRZ-Logo"/>
+                </div>
+            </Header>
+            <Grid stretched spacing={0} style={{minhight: 700, height: '95vh'}}>
+                <Grid.Column width={6}>
+                    <Segment>
+                        <Header as="h3" content="Auffällige Datensätze"/>
+                        <div class="right">
+                            <Dropdown/>
+                        </div>
+                        <List
+                            changesets={changesets}
+                            actual={actual}
+                        />
+                    </Segment>
+                </Grid.Column>
+                <Grid.Column width={10}>
+                    <div className="right">
+                        <Button as={Link} to={"/filter"}>aktuellen Filter Ansehen</Button>
+                    </div>
+                    <Segment style={{minHeight: '80px', height: '70%'}}>
+                        <Map/>
+                    </Segment>
+                    <Segment>
+                        <Detailview
+                        actual={actual}/>
+                    </Segment>
+                </Grid.Column>
+            </Grid>
+        </Segment>
+    );
 }
 
-export default Overview;
+const mapStateToProps = (state) => {
+    return {
+        changesets: state.changesets.entries,
+        actual: state.changesets.actual,
+        isLoading: state.changesets.isLoading,
+    };
+};
+
+export default connect(mapStateToProps)(Overview);

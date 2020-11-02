@@ -11,6 +11,18 @@
   width: 100%;
 }
 
+.right {
+  text-align: right;
+}
+.flex {
+  display: flex;
+  justify-content: space-between
+}
+.flex img {
+  width: 50px;
+  height: 50px;
+}
+
 
 
 

@@ -4,6 +4,11 @@ import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 
 class Map extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { counter: 0 };
+    }
+
     render() {
         return (
             <LeafletMap
