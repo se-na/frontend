@@ -1,0 +1,24 @@
+
+.cmap-container .cmap-map {
+    height: 70%;
+    width: 100%;
+}
+
+.cmap-container .cmap-sidebar {
+    position: absolute;
+    top: 70%;
+    left: -10px;
+    width: 100%;
+    height: 30%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.pointer {
+    cursor: pointer;
+}
+.cmap-container .cmap-diff-metadata,
+.cmap-container .cmap-diff-members,
+.cmap-container .cmap-diff-tags {
+    display: none;
+}

@@ -13,3 +13,12 @@ export function fetchChangesets(token) {
             .catch((error) => dispatch({ type: "FETCH_CHANGESETS_FAILED", error }));
     };
 }
+
+export function fetchActualChangeset(changeset){
+    return (dispatch) => {
+        dispatch({ type: "FETCH_CHANGESET_STARTED" });
+        console.log(changeset);
+        dispatch({ type: "FETCH_CHANGESET_SUCCEEDED", changeset });
+    }
+
+}

@@ -1,11 +1,13 @@
 import React from "react";
-import {Grid, Header, Segment} from "semantic-ui-react";
+import {Grid, Header, Segment, Button} from "semantic-ui-react";
 
 export function ListEntry (
-    {id,
-    changesetProperties, ...props}
+    {
+        id,
+        changesetProperties,
+        isSelected,
+    }
 ) {
-    console.log();
     const link1="https://www.openstreetmap.org/edit?changeset=" + id;
     return (
         <Segment>
@@ -20,6 +22,5 @@ export function ListEntry (
                 OSM Link
             </a>
         </Segment>
-
     );
 }

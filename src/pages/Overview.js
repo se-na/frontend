@@ -11,21 +11,18 @@ import {
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { fetchChangesets } from "../data/actions";
+import { fetchChangesets, fetchActualChangeset } from "../data/actions";
 
 import List from "../components/List"
 import Map from "../components/Map";
-import Detailview from "../components/Detailview";
 import Dropdown from "../components/SortDropdown";
-import {getChangesetsFromAPI} from "../data/api";
 import logo from '../logo.svg';
 
 function Overview ({
     changesets,
     actual,
+    initial,
     dispatch,}){
-
-
     const token = "Token ef77f928d91f3816ca60e7b73a8711119e825e44";
 
     useEffect(() => {
@@ -41,12 +38,19 @@ function Overview ({
             </Dimmer>
         );
     }
-
-    console.log(actual.id);
+    if(!actual){
+        dispatch(fetchActualChangeset(changesets[0]));
+        return (
+            <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+            </Dimmer>
+        );
+    }
     return (
         <Segment class="main">
             <Header>
                 <div className="flex">
+                    <button onClick={() => dispatch(fetchActualChangeset(changesets[2]))}>2</button>
                     <Button as={Link} to={"/"}>Zurück zur Übersicht</Button>
                     <h1>Default Filter</h1>
                     <img src={logo} alt="SRZ-Logo"/>
@@ -59,22 +63,15 @@ function Overview ({
                         <div class="right">
                             <Dropdown/>
                         </div>
-                        <List
-                            changesets={changesets}
-                            actual={actual}
-                        />
+                        <List/>
                     </Segment>
                 </Grid.Column>
                 <Grid.Column width={10}>
                     <div className="right">
                         <Button as={Link} to={"/filter"}>aktuellen Filter Ansehen</Button>
                     </div>
-                    <Segment style={{minHeight: '80px', height: '70%'}}>
+                    <Segment style={{minHeight: '80px', height: '90%'}}>
                         <Map/>
-                    </Segment>
-                    <Segment>
-                        <Detailview
-                        actual={actual}/>
                     </Segment>
                 </Grid.Column>
             </Grid>
@@ -85,8 +82,9 @@ function Overview ({
 const mapStateToProps = (state) => {
     return {
         changesets: state.changesets.entries,
-        actual: state.changesets.actual,
+        actual: state.changeset.actual,
         isLoading: state.changesets.isLoading,
+        initial: state.changesets.initial,
     };
 };
 
