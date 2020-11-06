@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "browser-router": "^0.2.0",
     "changeset-map": "^1.6.1",
     "leaflet": "^1.7.1",
     "leaflet-contextmenu": "^1.4.0",
@@ -21,6 +22,7 @@
     "react-scripts": "3.4.4",
     "reactstrap": "^8.6.0",
     "redux": "^4.0.5",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^2.0.0"
   },

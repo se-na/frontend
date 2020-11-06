@@ -18,7 +18,7 @@ function List (
                 <ListEntry
                     id={changeset.id}
                     changesetProperties={changeset.properties}
-                    isSelected={changesets.actual.id==changeset.id}
+                    isSelected={changesets.actual.id===changeset.id}
                 />
                 </button>
             ))}

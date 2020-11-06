@@ -17,8 +17,6 @@ export function fetchChangesets(token) {
 export function fetchActualChangeset(changeset){
     return (dispatch) => {
         dispatch({ type: "FETCH_CHANGESET_STARTED" });
-        console.log(changeset);
         dispatch({ type: "FETCH_CHANGESET_SUCCEEDED", changeset });
     }
-
 }

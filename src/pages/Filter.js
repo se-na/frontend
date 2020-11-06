@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function Filter() {
     return <h2>Filter</h2>;

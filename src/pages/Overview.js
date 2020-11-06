@@ -50,7 +50,6 @@ function Overview ({
         <Segment class="main">
             <Header>
                 <div className="flex">
-                    <button onClick={() => dispatch(fetchActualChangeset(changesets[2]))}>2</button>
                     <Button as={Link} to={"/"}>Zurück zur Übersicht</Button>
                     <h1>Default Filter</h1>
                     <img src={logo} alt="SRZ-Logo"/>

@@ -1,6 +1,4 @@
 import React from 'react'
-import {getChangeset, query, propsDiff, render} from 'changeset-map';
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'changeset-map/public/css/style.css';
 import './MapStyle.css'
 import {connect} from "react-redux";

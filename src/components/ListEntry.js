@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid, Header, Segment, Button} from "semantic-ui-react";
+import {Header, Segment} from "semantic-ui-react";
 
 export function ListEntry (
     {
@@ -18,6 +18,7 @@ export function ListEntry (
                 className="App-link"
                 href={link1}
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 OSM Link
             </a>
