@@ -7,10 +7,12 @@ import {fetchActualChangeset} from "../data/actions";
 function List (
     changesets,
     actual,
+    initial,
 ) {
     const onClick = (changeset) =>{
         changesets.dispatch(fetchActualChangeset(changeset));
     };
+    const select = changesets.actual | changesets.initial;
     return (
         <div>
             {changesets.changesets.map((changeset) => (
@@ -18,7 +20,7 @@ function List (
                 <ListEntry
                     id={changeset.id}
                     changesetProperties={changeset.properties}
-                    isSelected={changesets.actual.id===changeset.id}
+                    isSelected={select.id===changeset.id}
                 />
                 </button>
             ))}
@@ -30,6 +32,7 @@ const mapStateToProps = (state) => {
     return {
         changesets: state.changesets.entries,
         actual: state.changeset.actual,
+        initial: state.initial,
     }
 };
 

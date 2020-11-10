@@ -1,8 +1,13 @@
 import React from 'react';
 import { render, screen  } from '@testing-library/react';
-import {BrowserRouter, Router} from 'react-router-dom'
-import { createMemoryHistory } from 'history'
+import {BrowserRouter} from 'react-router-dom'
 import App from './App';
+import {applyMiddleware, createStore} from "redux";
+import rootReducer from "./data/reducers";
+import thunkMiddleware from "redux-thunk";
+import {loadChangesetsSucceeded} from "./testHelper/testAction";
+import {Provider} from "react-redux";
+import {shallow} from "enzyme";
 
 const renderWithRouter = (ui, { route = '/' } = {}) => {
   window.history.pushState({}, 'Test page', route);

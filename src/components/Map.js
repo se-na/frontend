@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 
 class Map extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
